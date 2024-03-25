@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" name="row" placeholder="Enter number of rows">
+    <input type="number" name="column" placeholder="Enter number of columns">
+    <div class="main">
+
+        <h1>Minesweeper</h1>
+        <p>Current Player: {{ current_player }}</p>
+        <table>
+            {% for row in range({{ rows }}) %}
+            <tr>
+                {% for col in range({{ cols }}) %}
+                    {% cell_chosen= row * rows+col %}
+                    <td class="cell" onclick="playMove({cell_chosen})">{{ board[row * rows + col] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <script>
+            function playMove(cellIndex) {
+                document.forms["minesweeperform"]["cell"].value = cellIndex;
+                document.forms["minesweeperform"].submit();
+            }
+            </script>
+    <form name="minesweeperform" method="post">
+        <input type="hidden" name="cell" value="">
+    </form>
+</div>
+
+</body>
+</html>
